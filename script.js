@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
       attribution: '© OpenStreetMap'
     }).addTo(map);
     const markers = [];
-    const FSQ_API_KEY = 'YOUR_FOURSQUARE_API_KEY';
     const PARTNERED_IDS = ['PARTNER_ID_1', 'PARTNER_ID_2'];
 
     locForm.addEventListener('submit', e => {
@@ -67,44 +66,44 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchStores(opts) {
       results.textContent = 'Loading...';
       try {
-        const url = new URL('https://api.foursquare.com/v3/places/search');
-        url.searchParams.set('query', 'smoke shop');
-        url.searchParams.set('limit', '20');
-        if (opts.near) url.searchParams.set('near', opts.near);
-        if (opts.ll) {
-          url.searchParams.set('ll', opts.ll);
-          url.searchParams.set('radius', '10000');
+        let lat, lon;
+        if (opts.near) {
+          const gUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(opts.near)}&limit=1`;
+          const geo = await fetch(gUrl).then(r => r.json());
+          if (!geo.length) { results.textContent = 'Location not found.'; return; }
+          lat = geo[0].lat; lon = geo[0].lon;
         }
-
-        const resp = await fetch(url.toString(), {
-          headers: { 'Accept': 'application/json', 'Authorization': FSQ_API_KEY }
-        });
-        const data = await resp.json();
-        showResults(data.results || []);
+        if (opts.ll) {
+          [lat, lon] = opts.ll.split(',');
+        }
+        const radius = 10000;
+        const query = `[out:json];node["shop"="tobacco"](around:${radius},${lat},${lon});out;`;
+        const url = 'https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(query);
+        const data = await fetch(url).then(r => r.json());
+        showResults(data.elements || [], lat, lon);
       } catch (err) {
         results.textContent = 'Error loading stores.';
       }
     }
 
-    function showResults(stores) {
+    function showResults(stores, lat, lon) {
       if (!stores.length) { results.textContent = 'No stores found.'; return; }
       results.innerHTML = '';
       markers.forEach(m => m.remove());
       markers.length = 0;
-      const first = stores[0];
-      if (first?.geocodes?.main) {
-        map.setView([first.geocodes.main.latitude, first.geocodes.main.longitude], 12);
-      }
+      map.setView([lat, lon], 12);
       stores.forEach(s => {
         const div = document.createElement('div');
         div.className = 'storeItem';
-        const badge = PARTNERED_IDS.includes(s.fsq_id)
+        const badge = PARTNERED_IDS.includes(String(s.id))
           ? '<span class="badge">Partner</span>' : '';
-        const addr = s.location.formatted_address || '';
-        div.innerHTML = `<strong>${s.name}</strong> ${badge}<br><small>${addr}</small>`;
+        const addressParts = [s.tags['addr:street'], s.tags['addr:city'], s.tags['addr:state'], s.tags['addr:postcode']].filter(Boolean);
+        const addr = addressParts.join(', ');
+        const name = s.tags.name || 'Smoke Shop';
+        div.innerHTML = `<strong>${name}</strong> ${badge}<br><small>${addr}</small>`;
         results.appendChild(div);
-        if (s.geocodes?.main) {
-          const marker = L.marker([s.geocodes.main.latitude, s.geocodes.main.longitude]).addTo(map);
+        if (s.lat && s.lon) {
+          const marker = L.marker([s.lat, s.lon]).addTo(map);
           marker.bindPopup(div.innerHTML);
           markers.push(marker);
         }

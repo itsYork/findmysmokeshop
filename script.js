@@ -31,4 +31,60 @@ document.addEventListener('DOMContentLoaded', () => {
     prev.addEventListener('click', () => track.scrollBy({left:-cardWidth,behavior:'smooth'}));
     next.addEventListener('click', () => track.scrollBy({left: cardWidth,behavior:'smooth'}));
   }
+
+  const locForm = document.getElementById('locatorForm');
+  if (locForm) {
+    const results = document.getElementById('storeResults');
+    const FSQ_API_KEY = 'YOUR_FOURSQUARE_API_KEY';
+    const PARTNERED_IDS = ['PARTNER_ID_1', 'PARTNER_ID_2'];
+
+    locForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const loc = document.getElementById('locationInput').value.trim();
+      if (loc) fetchStores({near: loc});
+    });
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        const c = pos.coords;
+        fetchStores({ll: `${c.latitude},${c.longitude}`});
+      });
+    }
+
+    async function fetchStores(opts) {
+      results.textContent = 'Loading...';
+      try {
+        const url = new URL('https://api.foursquare.com/v3/places/search');
+        url.searchParams.set('query', 'smoke shop');
+        url.searchParams.set('limit', '20');
+        if (opts.near) url.searchParams.set('near', opts.near);
+        if (opts.ll) {
+          url.searchParams.set('ll', opts.ll);
+          url.searchParams.set('radius', '10000');
+        }
+
+        const resp = await fetch(url.toString(), {
+          headers: { 'Accept': 'application/json', 'Authorization': FSQ_API_KEY }
+        });
+        const data = await resp.json();
+        showResults(data.results || []);
+      } catch (err) {
+        results.textContent = 'Error loading stores.';
+      }
+    }
+
+    function showResults(stores) {
+      if (!stores.length) { results.textContent = 'No stores found.'; return; }
+      results.innerHTML = '';
+      stores.forEach(s => {
+        const div = document.createElement('div');
+        div.className = 'storeItem';
+        const badge = PARTNERED_IDS.includes(s.fsq_id)
+          ? '<span class="badge">Partner</span>' : '';
+        const addr = s.location.formatted_address || '';
+        div.innerHTML = `<strong>${s.name}</strong> ${badge}<br><small>${addr}</small>`;
+        results.appendChild(div);
+      });
+    }
+  }
 });

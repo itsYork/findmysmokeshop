@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Brands | FindMySmokeShop</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="navbar">
+  <a href="index.html" class="brand">
+    <img src="https://cdn1.site-media.eu/images/0/17873942/full-logo-trasnparent-bg-usB-Tiu-NwyR5pEhcKXtxQ.png" alt="logo" width="110">
+  </a>
+  <nav role="navigation">
+    <ul class="navLinks" id="navLinks">
+      <li><a href="brands.html" class="active">Brands</a></li>
+      <li><a href="for-shops.html" >For Stores</a></li>
+      <li><a href="login.html" >Login</a></li>
+    </ul>
+  </nav>
+  <button class="menuBtn" id="menuBtn" aria-label="Toggle menu"><span></span></button>
+</header>
+  <section class="filterBar" style="max-width:var(--maxW);margin:2rem auto;padding:0 1rem;text-align:center">
+    <input type="search" id="brandSearch" placeholder="Search brand name…">
+    <select id="categoryFilter">
+      <option value="">All Categories</option>
+      <option value="vape">Vape</option>
+      <option value="glass">Glass</option>
+      <option value="accessories">Accessories</option>
+    </select>
+  </section>
+  <section class="brandGrid" id="brandGrid" style="max-width:var(--maxW);margin:0 auto 3rem;padding:0 1rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1.5rem;justify-items:center">
+    <a href="locator.html?q=RAW" class="brandCard" data-cat="accessories"><img src="images/logo-raw.png" alt="RAW logo"><span>RAW</span></a>
+    <a href="locator.html?q=Puffco" class="brandCard" data-cat="vape"><img src="images/logo-puffco.png" alt="Puffco logo"><span>Puffco</span></a>
+    <a href="locator.html?q=Stundenglass" class="brandCard" data-cat="glass"><img src="images/logo-stundenglass.png" alt="Stundenglass logo"><span>Stündenglass</span></a>
+  </section>
+<footer class="siteFooter">
+  <div class="footerInner">
+    <div class="footerCol">
+      <h3>FindMySmokeShop</h3>
+      <p>Your one‑stop directory for smoke‑shop brands, products & local inventory.</p>
+    </div>
+    <div class="footerCol">
+      <h4>Quick Links</h4>
+      <ul class="footerLinks">
+        <li><a href="brands.html">Brands</a></li>
+        <li><a href="for-shops.html">For Stores</a></li>
+        <li><a href="locator.html">Store Locator</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footerCol">
+      <h4>Legal</h4>
+      <ul class="footerLinks">
+        <li><a href="terms.html">Terms of Use</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+      </ul>
+    </div>
+    <div class="footerCol">
+      <h4>Follow Us</h4>
+      <div class="socialWrap">
+        <a href="#" aria-label="Instagram"></a>
+        <a href="#" aria-label="Facebook"></a>
+        <a href="#" aria-label="Twitter"></a>
+      </div>
+    </div>
+  </div>
+  <p class="copy">© <span id="year">2025</span> FindMySmokeShop. All rights reserved.</p>
+</footer>
+  <script src="script.js" defer></script>
+</body>
+</html>

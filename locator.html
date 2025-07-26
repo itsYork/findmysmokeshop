@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Store Locator | FindMySmokeShop</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
 <header class="navbar">
@@ -18,11 +19,30 @@
       <li><a href="login.html" >Login</a></li>
     </ul>
   </nav>
+  <a href="login.html" class="userIcon" aria-label="Account">👤</a>
   <button class="menuBtn" id="menuBtn" aria-label="Toggle menu"><span></span></button>
 </header>
-  <main style="max-width:800px;margin:3rem auto;text-align:center">
-    <h1>Store Locator</h1>
-    <p>This page is coming soon.</p>
+  <main class="locatorWrap">
+    <h1 class="locatorTitle">Store Locator</h1>
+    <div class="filterRow">
+      <button class="filterBtn">All</button>
+      <button class="filterBtn">Partnered</button>
+      <button class="filterBtn">Verified</button>
+    </div>
+    <div class="locatorGrid">
+      <div class="locatorSidebar">
+        <form id="locatorForm" class="searchForm">
+          <div class="searchBox">
+            <input type="text" id="locationInput" placeholder="City or ZIP" required>
+            <button type="submit">Find Stores</button>
+          </div>
+        </form>
+        <div id="storeResults" class="results"></div>
+      </div>
+      <div class="locatorMap">
+        <div id="map" class="map"></div>
+      </div>
+    </div>
   </main>
 <footer class="siteFooter">
   <div class="footerInner">
@@ -57,6 +77,7 @@
   </div>
   <p class="copy">© <span id="year">2025</span> FindMySmokeShop. All rights reserved.</p>
 </footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js" defer></script>
 </body>
 </html>

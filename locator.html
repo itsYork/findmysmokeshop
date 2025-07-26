@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Store Locator | FindMySmokeShop</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
 <header class="navbar">
@@ -28,6 +29,7 @@
         <button type="submit">Find Stores</button>
       </div>
     </form>
+    <div id="map" class="map"></div>
     <div id="storeResults" class="results"></div>
   </main>
 <footer class="siteFooter">
@@ -63,6 +65,7 @@
   </div>
   <p class="copy">© <span id="year">2025</span> FindMySmokeShop. All rights reserved.</p>
 </footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js" defer></script>
 </body>
 </html>

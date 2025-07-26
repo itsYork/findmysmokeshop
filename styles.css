@@ -75,3 +75,4 @@ img{display:block;max-width:100%}
 .results{display:flex;flex-direction:column;gap:.75rem;margin-top:1rem}
 .storeItem{padding:1rem;border:2px solid #e0e0e0;border-radius:var(--radius);text-align:left;box-shadow:var(--shadow)}
 .badge{background:var(--accent);color:#fff;border-radius:var(--radius);padding:.2rem .5rem;font-size:.75rem;margin-left:.4rem}
+.map{height:400px;margin:1rem auto;border-radius:var(--radius);overflow:hidden}

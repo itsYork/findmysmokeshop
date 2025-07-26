@@ -35,6 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const locForm = document.getElementById('locatorForm');
   if (locForm) {
     const results = document.getElementById('storeResults');
+    const mapEl = document.getElementById('map');
+    const map = L.map(mapEl).setView([37.09, -95.71], 4);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+    const markers = [];
     const FSQ_API_KEY = 'YOUR_FOURSQUARE_API_KEY';
     const PARTNERED_IDS = ['PARTNER_ID_1', 'PARTNER_ID_2'];
 
@@ -43,6 +49,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const loc = document.getElementById('locationInput').value.trim();
       if (loc) fetchStores({near: loc});
     });
+
+    const params = new URLSearchParams(location.search);
+    const q = params.get('q');
+    if (q) {
+      document.getElementById('locationInput').value = q;
+      fetchStores({near: q});
+    }
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(pos => {
@@ -76,6 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function showResults(stores) {
       if (!stores.length) { results.textContent = 'No stores found.'; return; }
       results.innerHTML = '';
+      markers.forEach(m => m.remove());
+      markers.length = 0;
+      const first = stores[0];
+      if (first?.geocodes?.main) {
+        map.setView([first.geocodes.main.latitude, first.geocodes.main.longitude], 12);
+      }
       stores.forEach(s => {
         const div = document.createElement('div');
         div.className = 'storeItem';
@@ -84,6 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const addr = s.location.formatted_address || '';
         div.innerHTML = `<strong>${s.name}</strong> ${badge}<br><small>${addr}</small>`;
         results.appendChild(div);
+        if (s.geocodes?.main) {
+          const marker = L.marker([s.geocodes.main.latitude, s.geocodes.main.longitude]).addTo(map);
+          marker.bindPopup(div.innerHTML);
+          markers.push(marker);
+        }
       });
     }
   }

@@ -42,6 +42,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }).addTo(map);
     const markers = [];
     const PARTNERED_IDS = ['PARTNER_ID_1', 'PARTNER_ID_2'];
+    const filterBtns = document.querySelectorAll('.filterBtn');
+    let activeFilter = 'all';
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.textContent.toLowerCase();
+        applyFilter();
+      });
+    });
 
     locForm.addEventListener('submit', e => {
       e.preventDefault();
@@ -94,9 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
       map.setView([lat, lon], 12);
       stores.forEach(s => {
         const div = document.createElement('div');
+        const partnered = PARTNERED_IDS.includes(String(s.id));
         div.className = 'storeItem';
-        const badge = PARTNERED_IDS.includes(String(s.id))
-          ? '<span class="badge">Partner</span>' : '';
+        div.dataset.partnered = partnered ? '1' : '0';
+        div.dataset.verified = partnered ? '1' : '0';
+        const badge = partnered ? '<span class="badge">Partner</span>' : '';
         const addressParts = [s.tags['addr:street'], s.tags['addr:city'], s.tags['addr:state'], s.tags['addr:postcode']].filter(Boolean);
         const addr = addressParts.join(', ');
         const name = s.tags.name || 'Smoke Shop';
@@ -107,6 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
           marker.bindPopup(div.innerHTML);
           markers.push(marker);
         }
+      });
+      applyFilter();
+    }
+
+    function applyFilter() {
+      const items = results.querySelectorAll('.storeItem');
+      items.forEach(it => {
+        let show = true;
+        if (activeFilter === 'partnered') show = it.dataset.partnered === '1';
+        if (activeFilter === 'verified') show = it.dataset.verified === '1';
+        it.style.display = show ? '' : 'none';
       });
     }
   }

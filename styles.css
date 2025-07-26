@@ -77,6 +77,7 @@ img{display:block;max-width:100%}
 .filterRow{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;}
 .filterBtn{padding:.4rem 1rem;border-radius:999px;border:2px solid var(--accent);background:#fff;color:var(--accent);font-size:.9rem;cursor:pointer;transition:background var(--dur);}
 .filterBtn:hover{background:var(--accent);color:#fff}
+.filterBtn.active{background:var(--accent);color:#fff}
 .locatorGrid{display:grid;grid-template-columns:30% 70%;gap:1.5rem;align-items:start;}
 .locatorSidebar{display:flex;flex-direction:column;gap:1rem;}
 .results{display:flex;flex-direction:column;gap:.75rem;overflow-y:auto;max-height:calc(100vh - 260px);padding-right:.5rem}

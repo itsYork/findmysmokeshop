@@ -83,6 +83,7 @@ img{display:block;max-width:100%}
 .results{display:flex;flex-direction:column;gap:.75rem;overflow-y:auto;max-height:calc(100vh - 260px);padding-right:.5rem}
 .storeItem{padding:1rem;border:2px solid #e0e0e0;border-radius:var(--radius);text-align:left;box-shadow:var(--shadow);background:#fff}
 .badge{background:var(--accent);color:#fff;border-radius:var(--radius);padding:.2rem .5rem;font-size:.75rem;margin-left:.4rem}
+.badge-verified{background:#5cb85c;color:#fff;border-radius:var(--radius);padding:.2rem .5rem;font-size:.75rem;margin-left:.4rem}
 .locatorMap .map{height:calc(100vh - 220px);width:100%;border-radius:var(--radius);overflow:hidden}
 @media(max-width:800px){
   .locatorGrid{grid-template-columns:1fr}

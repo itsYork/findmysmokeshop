@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }).addTo(map);
     const markers = [];
     const PARTNERED_IDS = ['PARTNER_ID_1', 'PARTNER_ID_2'];
+    const VERIFIED_IDS  = ['VERIFIED_ID_1', 'VERIFIED_ID_2'];
     const filterBtns = document.querySelectorAll('.filterBtn');
     let activeFilter = 'all';
 
@@ -106,10 +107,13 @@ document.addEventListener('DOMContentLoaded', () => {
       stores.forEach(s => {
         const div = document.createElement('div');
         const partnered = PARTNERED_IDS.includes(String(s.id));
+        const verified  = VERIFIED_IDS.includes(String(s.id));
         div.className = 'storeItem';
         div.dataset.partnered = partnered ? '1' : '0';
-        div.dataset.verified = partnered ? '1' : '0';
-        const badge = partnered ? '<span class="badge">Partner</span>' : '';
+        div.dataset.verified = verified ? '1' : '0';
+        let badge = '';
+        if (partnered) badge = '<span class="badge">Partner</span>';
+        else if (verified) badge = '<span class="badge badge-verified">Verified</span>';
         const addressParts = [s.tags['addr:street'], s.tags['addr:city'], s.tags['addr:state'], s.tags['addr:postcode']].filter(Boolean);
         const addr = addressParts.join(', ');
         const name = s.tags.name || 'Smoke Shop';

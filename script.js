@@ -38,6 +38,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const FSQ_API_KEY = 'YOUR_FOURSQUARE_API_KEY';
     const PARTNERED_IDS = ['PARTNER_ID_1', 'PARTNER_ID_2'];
 
+    const filterBtns = document.querySelectorAll('.filterBtn');
+    let activeFilter = 'all';
+    let lastOpts = null;
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const txt = btn.textContent.trim();
+        if (txt === 'Open Now') activeFilter = 'open';
+        else if (txt === 'Partnered') activeFilter = 'partnered';
+        else activeFilter = 'all';
+        if (lastOpts) fetchStores(lastOpts);
+      });
+    });
+
     locForm.addEventListener('submit', e => {
       e.preventDefault();
       const loc = document.getElementById('locationInput').value.trim();
@@ -62,11 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function fetchStores(opts) {
+      lastOpts = opts;
       results.textContent = 'Loading...';
       try {
         const url = new URL('https://api.foursquare.com/v3/places/search');
         url.searchParams.set('query', 'smoke shop');
         url.searchParams.set('limit', '20');
+        if (activeFilter === 'open') url.searchParams.set('open_now', 'true');
         if (opts.near) url.searchParams.set('near', opts.near);
         if (opts.ll) {
           url.searchParams.set('ll', opts.ll);
@@ -77,7 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: { 'Accept': 'application/json', 'Authorization': FSQ_API_KEY }
         });
         const data = await resp.json();
-        showResults(data.results || []);
+        let stores = data.results || [];
+        if (activeFilter === 'partnered') {
+          stores = stores.filter(s => PARTNERED_IDS.includes(s.fsq_id));
+        }
+        showResults(stores);
       } catch (err) {
         results.textContent = 'Error loading stores.';
       }

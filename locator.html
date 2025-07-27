@@ -6,29 +6,44 @@
   <title>Store Locator | FindMySmokeShop</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="locatorPage">
 <header class="navbar">
   <a href="index.html" class="brand">
     <img src="https://cdn1.site-media.eu/images/0/17873942/full-logo-trasnparent-bg-usB-Tiu-NwyR5pEhcKXtxQ.png" alt="logo" width="110">
   </a>
   <nav role="navigation">
     <ul class="navLinks" id="navLinks">
-      <li><a href="brands.html" >Brands</a></li>
-      <li><a href="for-shops.html" >For Stores</a></li>
-      <li><a href="login.html" >Login</a></li>
+      <li><a href="brands.html">Brands</a></li>
+      <li><a href="for-shops.html">For Stores</a></li>
+      <li><a href="login.html">Login</a></li>
     </ul>
   </nav>
+  <a href="login.html" class="userIcon" aria-label="Account">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4 0-7 3-7 6v1h14v-1c0-3-3-6-7-6z"/></svg>
+  </a>
   <button class="menuBtn" id="menuBtn" aria-label="Toggle menu"><span></span></button>
 </header>
-  <main class="locatorWrap">
+  <section class="locatorHeader">
     <h1>Store Locator</h1>
-    <form id="locatorForm" class="searchForm" style="margin-bottom:1.5rem">
-      <div class="searchBox">
-        <input type="text" id="locationInput" placeholder="City or ZIP" required>
-        <button type="submit">Find Stores</button>
-      </div>
-    </form>
-    <div id="storeResults" class="results"></div>
+    <div class="filterRow">
+      <button class="filterBtn active">All</button>
+      <button class="filterBtn">Open Now</button>
+      <button class="filterBtn">Partnered</button>
+    </div>
+  </section>
+  <main class="locatorGrid">
+    <div class="locatorList">
+      <form id="locatorForm" class="searchForm">
+        <div class="searchBox">
+          <input type="text" id="locationInput" placeholder="City or ZIP" required>
+          <button type="submit">Find Stores</button>
+        </div>
+      </form>
+      <div id="storeResults" class="results"></div>
+    </div>
+    <div class="locatorMap">
+      <div id="map" class="mapArea">Map Placeholder</div>
+    </div>
   </main>
 <footer class="siteFooter">
   <div class="footerInner">

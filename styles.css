@@ -75,3 +75,19 @@ img{display:block;max-width:100%}
 .results{display:flex;flex-direction:column;gap:.75rem;margin-top:1rem}
 .storeItem{padding:1rem;border:2px solid #e0e0e0;border-radius:var(--radius);text-align:left;box-shadow:var(--shadow)}
 .badge{background:var(--accent);color:#fff;border-radius:var(--radius);padding:.2rem .5rem;font-size:.75rem;margin-left:.4rem}
+
+/* ---- Locator Page Layout ---- */
+.locatorPage{background:#fafafa}
+.locatorHeader{max-width:var(--maxW);margin:2rem auto 1.5rem;padding:0 1rem}
+.locatorHeader h1{font-size:2rem;margin-bottom:1rem;text-align:left}
+.filterRow{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.filterBtn{padding:.4rem 1rem;border:2px solid var(--accent);border-radius:999px;background:#fff;color:var(--accent);cursor:pointer;font-size:.9rem}
+.filterBtn.active{background:var(--accent);color:#fff}
+.locatorGrid{display:flex;gap:2rem;max-width:var(--maxW);margin:0 auto;padding:0 1rem}
+.locatorList{flex:0 0 30%;display:flex;flex-direction:column}
+.locatorList .results{flex:1 1 auto;overflow-y:auto;padding-right:.5rem;margin-top:1rem}
+.locatorMap{flex:1;background:#e5e5e5;border-radius:var(--radius);position:relative}
+.mapArea{width:100%;height:100%;border-radius:var(--radius);background:#ccc;display:flex;align-items:center;justify-content:center;color:#555;font-size:1rem}
+.userIcon{margin-left:1rem;color:var(--accent);display:flex;align-items:center}
+.userIcon svg{width:28px;height:28px}
+@media(max-width:800px){.locatorGrid{flex-direction:column}.locatorList{flex:0 0 auto}}

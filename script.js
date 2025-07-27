@@ -79,10 +79,25 @@ document.addEventListener('DOMContentLoaded', () => {
       stores.forEach(s => {
         const div = document.createElement('div');
         div.className = 'storeItem';
-        const badge = PARTNERED_IDS.includes(s.fsq_id)
-          ? '<span class="badge">Partner</span>' : '';
-        const addr = s.location.formatted_address || '';
-        div.innerHTML = `<strong>${s.name}</strong> ${badge}<br><small>${addr}</small>`;
+
+        const nameEl = document.createElement('strong');
+        nameEl.textContent = s.name || '';
+        div.appendChild(nameEl);
+
+        if (PARTNERED_IDS.includes(s.fsq_id)) {
+          div.appendChild(document.createTextNode(' '));
+          const badge = document.createElement('span');
+          badge.className = 'badge';
+          badge.textContent = 'Partner';
+          div.appendChild(badge);
+        }
+
+        div.appendChild(document.createElement('br'));
+
+        const addr = document.createElement('small');
+        addr.textContent = s.location.formatted_address || '';
+        div.appendChild(addr);
+
         results.appendChild(div);
       });
     }

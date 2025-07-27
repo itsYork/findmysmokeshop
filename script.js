@@ -35,8 +35,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const locForm = document.getElementById('locatorForm');
   if (locForm) {
     const results = document.getElementById('storeResults');
-    const FSQ_API_KEY = 'YOUR_FOURSQUARE_API_KEY';
+    let FSQ_API_KEY = '';
     const PARTNERED_IDS = ['PARTNER_ID_1', 'PARTNER_ID_2'];
+
+    fetch('/api/config')
+      .then(r => r.json())
+      .then(cfg => {
+        FSQ_API_KEY = cfg.fsqApiKey || '';
+        if (!FSQ_API_KEY) {
+          results.textContent = 'Foursquare API key missing.';
+          return;
+        }
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(pos => {
+            const c = pos.coords;
+            fetchStores({ll: `${c.latitude},${c.longitude}`});
+          });
+        }
+      })
+      .catch(() => {
+        results.textContent = 'Error loading configuration.';
+      });
 
     locForm.addEventListener('submit', e => {
       e.preventDefault();
@@ -44,14 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (loc) fetchStores({near: loc});
     });
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(pos => {
-        const c = pos.coords;
-        fetchStores({ll: `${c.latitude},${c.longitude}`});
-      });
-    }
-
     async function fetchStores(opts) {
+      if (!FSQ_API_KEY) { results.textContent = 'Foursquare API key missing.'; return; }
       results.textContent = 'Loading...';
       try {
         const url = new URL('https://api.foursquare.com/v3/places/search');

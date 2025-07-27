@@ -38,6 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const FSQ_API_KEY = 'YOUR_FOURSQUARE_API_KEY';
     const PARTNERED_IDS = ['PARTNER_ID_1', 'PARTNER_ID_2'];
 
+    const params = new URLSearchParams(window.location.search);
+    const initialQuery = params.get('q');
+    const inputEl = document.getElementById('locationInput');
+    if (initialQuery && inputEl) inputEl.value = initialQuery;
+
     const filterBtns = document.querySelectorAll('.filterBtn');
     let activeFilter = 'all';
     let lastOpts = null;
@@ -61,10 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const geoMsg = document.getElementById('geoMessage');
-    if (navigator.geolocation) {
+    if (initialQuery) {
+      fetchStores({ near: initialQuery });
+    } else if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(pos => {
         const c = pos.coords;
-        fetchStores({ll: `${c.latitude},${c.longitude}`});
+        fetchStores({ ll: `${c.latitude},${c.longitude}` });
       }, () => {
         if (geoMsg) {
           geoMsg.textContent =

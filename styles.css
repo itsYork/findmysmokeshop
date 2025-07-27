@@ -31,6 +31,7 @@ img{display:block;max-width:100%}
 .heroBlock::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.65) 100%);z-index:0;}
 .heroInner{position:relative;z-index:1;width:100%;max-width:var(--maxW);padding:0 1rem;}
 .heroInner h1{font-size:clamp(1.9rem,4vw,3rem);font-weight:700;margin-bottom:1.8rem;color:#f9f9f9}
+.heroInner p.hero-text{margin-top:1rem;font-size:1.1rem;color:#f9f9f9}
 /* ---- Search ---- */
 .searchForm{display:flex;justify-content:center}
 .searchBox{background:rgba(255,255,255,.88);backdrop-filter:blur(4px);border-radius:var(--radius);box-shadow:var(--shadow);display:inline-flex;gap:.6rem;flex-wrap:nowrap;align-items:center;padding:.7rem 1rem;}

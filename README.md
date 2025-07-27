@@ -22,3 +22,9 @@ const FSQ_API_KEY = 'YOUR_FOURSQUARE_API_KEY';
 
 Replace the placeholder value with your actual API key before using the locator page.
 
+## Login credentials
+
+Brand and retailer logins use credentials stored in the browser's
+`localStorage`. This approach is meant only for demo/testing purposes and is
+not secure for real accounts.
+

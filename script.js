@@ -143,6 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ----- Simple Login Handling -----
+  // Credentials are stored in localStorage purely for demo/testing
+  // purposes and should not be considered secure.
   const brandForm = document.getElementById('brandLoginForm');
   if (brandForm) {
     brandForm.addEventListener('submit', e => {

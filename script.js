@@ -141,4 +141,60 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   }
+
+  // ----- Simple Login Handling -----
+  const brandForm = document.getElementById('brandLoginForm');
+  if (brandForm) {
+    brandForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('brandEmail').value.trim();
+      const pass = document.getElementById('brandPassword').value;
+      const accounts = JSON.parse(localStorage.getItem('brandAccounts') || '{}');
+      if (accounts[email] && accounts[email].password === pass) {
+        alert('Login successful.');
+      } else {
+        alert('Invalid credentials. Please contact us to request access.');
+      }
+      brandForm.reset();
+    });
+  }
+
+  const retailForm = document.getElementById('retailLoginForm');
+  if (retailForm) {
+    retailForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('retailEmail').value.trim();
+      const pass = document.getElementById('retailPassword').value;
+      const accounts = JSON.parse(localStorage.getItem('retailAccounts') || '{}');
+      if (accounts[email] && accounts[email].password === pass) {
+        alert('Login successful.');
+      } else {
+        alert('Invalid credentials. Please contact us to request access.');
+      }
+      retailForm.reset();
+    });
+  }
+
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const status = document.getElementById('contactStatus');
+      if (status) status.textContent = 'Thank you for reaching out. We will contact you soon.';
+      contactForm.reset();
+    });
+  }
+
+  // Utility functions for adding accounts manually via browser console
+  window.createBrandAccount = (email, password) => {
+    const accounts = JSON.parse(localStorage.getItem('brandAccounts') || '{}');
+    accounts[email] = { password };
+    localStorage.setItem('brandAccounts', JSON.stringify(accounts));
+  };
+
+  window.createRetailAccount = (email, password) => {
+    const accounts = JSON.parse(localStorage.getItem('retailAccounts') || '{}');
+    accounts[email] = { password };
+    localStorage.setItem('retailAccounts', JSON.stringify(accounts));
+  };
 });

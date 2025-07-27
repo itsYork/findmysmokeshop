@@ -141,4 +141,97 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   }
+
+  // ----- Simple Login Handling -----
+  const brandForm = document.getElementById('brandLoginForm');
+  if (brandForm) {
+    if (localStorage.getItem('brandLoggedIn')) {
+      window.location.href = 'brand-dashboard.html';
+    }
+    brandForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('brandEmail').value.trim();
+      const pass = document.getElementById('brandPassword').value;
+      const accounts = JSON.parse(localStorage.getItem('brandAccounts') || '{}');
+      if (accounts[email] && accounts[email].password === pass) {
+        localStorage.setItem('brandLoggedIn', email);
+        window.location.href = 'brand-dashboard.html';
+      } else {
+        alert('Invalid credentials. Please contact us to request access.');
+      }
+      brandForm.reset();
+    });
+  }
+
+  const retailForm = document.getElementById('retailLoginForm');
+  if (retailForm) {
+    if (localStorage.getItem('retailLoggedIn')) {
+      window.location.href = 'retail-dashboard.html';
+    }
+    retailForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('retailEmail').value.trim();
+      const pass = document.getElementById('retailPassword').value;
+      const accounts = JSON.parse(localStorage.getItem('retailAccounts') || '{}');
+      if (accounts[email] && accounts[email].password === pass) {
+        localStorage.setItem('retailLoggedIn', email);
+        window.location.href = 'retail-dashboard.html';
+      } else {
+        alert('Invalid credentials. Please contact us to request access.');
+      }
+      retailForm.reset();
+    });
+  }
+
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const status = document.getElementById('contactStatus');
+      if (status) status.textContent = 'Thank you for reaching out. We will contact you soon.';
+      contactForm.reset();
+    });
+  }
+
+  // ----- Dashboard handling -----
+  const brandDash = document.getElementById('brandDashboard');
+  if (brandDash) {
+    const email = localStorage.getItem('brandLoggedIn');
+    if (!email) {
+      window.location.href = 'brand-login.html';
+    } else {
+      brandDash.querySelector('.user-email').textContent = email;
+      document.getElementById('brandLogout').addEventListener('click', () => {
+        localStorage.removeItem('brandLoggedIn');
+        window.location.href = 'brand-login.html';
+      });
+    }
+  }
+
+  const retailDash = document.getElementById('retailDashboard');
+  if (retailDash) {
+    const email = localStorage.getItem('retailLoggedIn');
+    if (!email) {
+      window.location.href = 'retail-login.html';
+    } else {
+      retailDash.querySelector('.user-email').textContent = email;
+      document.getElementById('retailLogout').addEventListener('click', () => {
+        localStorage.removeItem('retailLoggedIn');
+        window.location.href = 'retail-login.html';
+      });
+    }
+  }
+
+  // Utility functions for adding accounts manually via browser console
+  window.createBrandAccount = (email, password) => {
+    const accounts = JSON.parse(localStorage.getItem('brandAccounts') || '{}');
+    accounts[email] = { password };
+    localStorage.setItem('brandAccounts', JSON.stringify(accounts));
+  };
+
+  window.createRetailAccount = (email, password) => {
+    const accounts = JSON.parse(localStorage.getItem('retailAccounts') || '{}');
+    accounts[email] = { password };
+    localStorage.setItem('retailAccounts', JSON.stringify(accounts));
+  };
 });

@@ -153,7 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const pass = document.getElementById('brandPassword').value;
       const accounts = JSON.parse(localStorage.getItem('brandAccounts') || '{}');
       if (accounts[email] && accounts[email].password === pass) {
-        alert('Login successful.');
+        localStorage.setItem('brandLoggedIn','true');
+        window.location.href = 'brand-portal.html';
       } else {
         alert('Invalid credentials. Please contact us to request access.');
       }
@@ -169,7 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const pass = document.getElementById('retailPassword').value;
       const accounts = JSON.parse(localStorage.getItem('retailAccounts') || '{}');
       if (accounts[email] && accounts[email].password === pass) {
-        alert('Login successful.');
+        localStorage.setItem('retailLoggedIn','true');
+        window.location.href = 'retail-portal.html';
       } else {
         alert('Invalid credentials. Please contact us to request access.');
       }
@@ -199,4 +201,28 @@ document.addEventListener('DOMContentLoaded', () => {
     accounts[email] = { password };
     localStorage.setItem('retailAccounts', JSON.stringify(accounts));
   };
+
+  // ----- Portal Auth Checks -----
+  const brandPortal = document.getElementById('brandPortal');
+  if (brandPortal && !localStorage.getItem('brandLoggedIn')) {
+    window.location.href = 'brand-login.html';
+  }
+  const brandLogout = document.getElementById('brandLogout');
+  if (brandLogout) {
+    brandLogout.addEventListener('click', () => {
+      localStorage.removeItem('brandLoggedIn');
+      window.location.href = 'brand-login.html';
+    });
+  }
+  const retailPortal = document.getElementById('retailPortal');
+  if (retailPortal && !localStorage.getItem('retailLoggedIn')) {
+    window.location.href = 'retail-login.html';
+  }
+  const retailLogout = document.getElementById('retailLogout');
+  if (retailLogout) {
+    retailLogout.addEventListener('click', () => {
+      localStorage.removeItem('retailLoggedIn');
+      window.location.href = 'retail-login.html';
+    });
+  }
 });

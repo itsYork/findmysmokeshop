@@ -1,0 +1,8 @@
+# Ignore log and temp files
+*.log
+*.tmp
+.DS_Store
+
+# Ignore dependency directories
+node_modules/
+venv/

@@ -6,6 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const yr = document.getElementById('year');
   if (yr) yr.textContent = new Date().getFullYear();
 
+  // Seed default accounts for testing if none exist
+  const seedDefaults = () => {
+    if (!localStorage.getItem('brandAccounts')) {
+      localStorage.setItem('brandAccounts', JSON.stringify({
+        'brand@test.com': { password: 'test123' }
+      }));
+    }
+    if (!localStorage.getItem('retailAccounts')) {
+      localStorage.setItem('retailAccounts', JSON.stringify({
+        'store@test.com': { password: 'test123' }
+      }));
+    }
+  };
+  seedDefaults();
+
   const search  = document.getElementById('brandSearch');
   const select  = document.getElementById('categoryFilter');
   if (search && select) {
@@ -187,8 +202,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contactForm) {
     contactForm.addEventListener('submit', e => {
       e.preventDefault();
+      const name = document.getElementById('contactName').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const msg = document.getElementById('contactMessage').value.trim();
       const status = document.getElementById('contactStatus');
-      if (status) status.textContent = 'Thank you for reaching out. We will contact you soon.';
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${msg}`);
+      window.location.href = `mailto:ecoelevation.owner@gmail.com?subject=Account%20Request&body=${body}`;
+      if (status) {
+        status.textContent = 'Opening your email client...';
+      }
       contactForm.reset();
     });
   }

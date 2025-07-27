@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Retailer portal to update inventory and store details.">
-  <title>Retail Store Login | FindMySmokeShop</title>
+  <meta name="description" content="Retail dashboard to manage store inventory.">
+  <title>Retail Dashboard | FindMySmokeShop</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -21,29 +21,16 @@
   </nav>
   <button class="menuBtn" id="menuBtn" aria-label="Toggle menu"><span></span></button>
 </header>
-  <main style="max-width:600px;margin:3rem auto;text-align:center">
-    <h1>Retail Store Login</h1>
-    <form id="retailLoginForm" class="login-form">
-      <div class="form-row">
-        <label>Email<br>
-          <input type="email" id="retailEmail" required>
-        </label>
-      </div>
-      <div class="form-row">
-        <label>Password<br>
-          <input type="password" id="retailPassword" required>
-        </label>
-      </div>
-      <button type="submit" class="btn btn--primary">Log In</button>
-    </form>
-    <p class="small-text">Test account: <strong>store@test.com</strong> / <strong>test123</strong></p>
-    <p class="small-text">Store logins are provided only to confirmed retailers. <a href="contact.html">Contact us</a> to get verified.</p>
+  <main style="max-width:700px;margin:3rem auto;text-align:center" id="retailDashboard">
+    <h1>Welcome, <span class="user-email"></span></h1>
+    <p>This is a placeholder dashboard for retail stores.</p>
+    <button id="retailLogout" class="btn btn--primary">Log Out</button>
   </main>
 <footer class="siteFooter">
   <div class="footerInner">
     <div class="footerCol">
       <h3>FindMySmokeShop</h3>
-      <p>Your one‑stop directory for smoke‑shop brands, products & local inventory.</p>
+      <p>Your one-stop directory for smoke-shop brands, products & local inventory.</p>
     </div>
     <div class="footerCol">
       <h4>Quick Links</h4>

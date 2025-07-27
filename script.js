@@ -44,10 +44,20 @@ document.addEventListener('DOMContentLoaded', () => {
       if (loc) fetchStores({near: loc});
     });
 
+    const geoMsg = document.getElementById('geoMessage');
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(pos => {
         const c = pos.coords;
         fetchStores({ll: `${c.latitude},${c.longitude}`});
+      }, () => {
+        if (geoMsg) {
+          geoMsg.textContent =
+            'Unable to access your location. Please search by city or ZIP.';
+          geoMsg.removeAttribute('hidden');
+        } else {
+          results.textContent =
+            'Unable to access your location. Please search by city or ZIP.';
+        }
       });
     }
 

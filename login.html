@@ -1,69 +1,113 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Choose brand or retail login to manage your presence.">
-  <title>Login | FindMySmokeShop</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .loginWrap{max-width:700px;margin:3rem auto;padding:0 1rem;display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;}
-    .loginBox{flex:0 0 280px;text-align:center;background:#fafafa;padding:2rem 1rem;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:.25s;cursor:pointer;}
-    .loginBox:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(0,0,0,.12);}
-    .loginBox h2{font-size:1.4rem;margin-bottom:.8rem;color:var(--accent);}
-  </style>
-</head>
-<body>
-<header class="navbar">
-  <a href="index.html" class="brand">
-    <img src="https://cdn1.site-media.eu/images/0/17873942/full-logo-trasnparent-bg-usB-Tiu-NwyR5pEhcKXtxQ.png" alt="logo" width="110">
-  </a>
-  <nav role="navigation">
-    <ul class="navLinks" id="navLinks">
-      <li><a href="brands.html" >Brands</a></li>
-      <li><a href="for-shops.html" >For Stores</a></li>
-      <li><a href="login.html" class="active">Login</a></li>
-    </ul>
-  </nav>
-  <button class="menuBtn" id="menuBtn" aria-label="Toggle menu"><span></span></button>
-</header>
-  <main class="loginWrap">
-    <a href="brand-login.html"  class="loginBox"><h2>I’m a Brand</h2><p>Manage products, update logos, access analytics.</p></a>
-    <a href="retail-login.html" class="loginBox"><h2>I’m a Retail Store</h2><p>Update inventory, claim your location, view lead stats.</p></a>
-  </main>
-<footer class="siteFooter">
-  <div class="footerInner">
-    <div class="footerCol">
-      <h3>FindMySmokeShop</h3>
-      <p>Your one‑stop directory for smoke‑shop brands, products & local inventory.</p>
-    </div>
-    <div class="footerCol">
-      <h4>Quick Links</h4>
-      <ul class="footerLinks">
-        <li><a href="brands.html">Brands</a></li>
-        <li><a href="for-shops.html">For Stores</a></li>
-        <li><a href="locator.html">Store Locator</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-      </ul>
-    </div>
-    <div class="footerCol">
-      <h4>Legal</h4>
-      <ul class="footerLinks">
-        <li><a href="terms.html">Terms of Use</a></li>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-      </ul>
-    </div>
-    <div class="footerCol">
-      <h4>Follow Us</h4>
-      <div class="socialWrap">
-        <a href="#" aria-label="Instagram"></a>
-        <a href="#" aria-label="Facebook"></a>
-        <a href="#" aria-label="Twitter"></a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Choose brand or retail login to manage your presence."
+    />
+    <title>Login | FindMySmokeShop</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .loginWrap {
+        max-width: 700px;
+        margin: 3rem auto;
+        padding: 0 1rem;
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .loginBox {
+        flex: 0 0 280px;
+        text-align: center;
+        background: #fafafa;
+        padding: 2rem 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: 0.25s;
+        cursor: pointer;
+      }
+      .loginBox:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      }
+      .loginBox h2 {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <a href="index.html" class="brand">
+        <img
+          src="https://cdn1.site-media.eu/images/0/17873942/full-logo-trasnparent-bg-usB-Tiu-NwyR5pEhcKXtxQ.png"
+          alt="logo"
+          width="110"
+        />
+      </a>
+      <nav role="navigation">
+        <ul class="navLinks" id="navLinks">
+          <li><a href="brands.html">Brands</a></li>
+          <li><a href="for-shops.html">For Stores</a></li>
+          <li><a href="login.html" class="active">Login</a></li>
+        </ul>
+      </nav>
+      <button class="menuBtn" id="menuBtn" aria-label="Toggle menu">
+        <span></span>
+      </button>
+    </header>
+    <main class="loginWrap">
+      <a href="brand-login.html" class="loginBox"
+        ><h2>I’m a Brand</h2>
+        <p>Manage products, update logos, access analytics.</p></a
+      >
+      <a href="retail-login.html" class="loginBox"
+        ><h2>I’m a Retail Store</h2>
+        <p>Update inventory, claim your location, view lead stats.</p></a
+      >
+    </main>
+    <footer class="siteFooter">
+      <div class="footerInner">
+        <div class="footerCol">
+          <h3>FindMySmokeShop</h3>
+          <p>
+            Your one‑stop directory for smoke‑shop brands, products & local
+            inventory.
+          </p>
+        </div>
+        <div class="footerCol">
+          <h4>Quick Links</h4>
+          <ul class="footerLinks">
+            <li><a href="brands.html">Brands</a></li>
+            <li><a href="for-shops.html">For Stores</a></li>
+            <li><a href="locator.html">Store Locator</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footerCol">
+          <h4>Legal</h4>
+          <ul class="footerLinks">
+            <li><a href="terms.html">Terms of Use</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footerCol">
+          <h4>Follow Us</h4>
+          <div class="socialWrap">
+            <a href="#" aria-label="Instagram"></a>
+            <a href="#" aria-label="Facebook"></a>
+            <a href="#" aria-label="Twitter"></a>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <p class="copy">© <span id="year">2025</span> FindMySmokeShop. All rights reserved.</p>
-</footer>
-  <script src="script.js" defer></script>
-</body>
+      <p class="copy">
+        © <span id="year">2025</span> FindMySmokeShop. All rights reserved.
+      </p>
+    </footer>
+    <script src="script.js" defer></script>
+  </body>
 </html>

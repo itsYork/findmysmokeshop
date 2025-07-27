@@ -1,87 +1,124 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Find smoke shops near you and browse top brands.">
-  <title>FindMySmokeShop</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<header class="navbar">
-  <a href="index.html" class="brand">
-    <img src="https://cdn1.site-media.eu/images/0/17873942/full-logo-trasnparent-bg-usB-Tiu-NwyR5pEhcKXtxQ.png" alt="logo" width="110">
-  </a>
-  <nav role="navigation">
-    <ul class="navLinks" id="navLinks">
-      <li><a href="brands.html" >Brands</a></li>
-      <li><a href="for-shops.html" >For Stores</a></li>
-      <li><a href="login.html" >Login</a></li>
-    </ul>
-  </nav>
-  <button class="menuBtn" id="menuBtn" aria-label="Toggle menu"><span></span></button>
-</header>
-  <section class="heroBlock">
-    <div class="heroInner">
-      <h1>Find a Smoke Shop Near You</h1>
-      <form action="locator.html" method="GET" class="searchForm">
-        <div class="searchBox">
-          <label for="homeSearch" class="visually-hidden">Search by city, ZIP, or product</label>
-          <input id="homeSearch" type="text" name="q" placeholder="City, ZIP, or product…" required>
-          <button type="submit">Search</button>
-        </div>
-      </form>
-    </div>
-  </section>
-  <section class="featured">
-    <h2 class="featured__title">Featured Brands</h2>
-    <div class="featured__carousel">
-      <button class="carousel__nav carousel__nav--prev" aria-label="Previous">&#10094;</button>
-      <ul class="carousel__track">
-        <li class="productCard"><img src="images/logo-raw.png" alt="RAW logo"><span>RAW</span></li>
-        <li class="productCard"><img src="images/logo-puffco.png" alt="Puffco logo"><span>Puffco</span></li>
-        <li class="productCard"><img src="images/logo-stundenglass.png" alt="Stündenglass logo"><span>Stündenglass</span></li>
-      </ul>
-      <button class="carousel__nav carousel__nav--next" aria-label="Next">&#10095;</button>
-    </div>
-    <div class="featured__cta">
-      <a href="locator.html" class="btn btn--primary">Store Locator</a>
-      <a href="learn-more.html" class="btn btn--secondary">Learn More</a>
-    </div>
-  </section>
-<footer class="siteFooter">
-  <div class="footerInner">
-    <div class="footerCol">
-      <h3>FindMySmokeShop</h3>
-      <p>Your one‑stop directory for smoke‑shop brands, products & local inventory.</p>
-    </div>
-    <div class="footerCol">
-      <h4>Quick Links</h4>
-      <ul class="footerLinks">
-        <li><a href="brands.html">Brands</a></li>
-        <li><a href="for-shops.html">For Stores</a></li>
-        <li><a href="locator.html">Store Locator</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-      </ul>
-    </div>
-    <div class="footerCol">
-      <h4>Legal</h4>
-      <ul class="footerLinks">
-        <li><a href="terms.html">Terms of Use</a></li>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-      </ul>
-    </div>
-    <div class="footerCol">
-      <h4>Follow Us</h4>
-      <div class="socialWrap">
-        <a href="#" aria-label="Instagram"></a>
-        <a href="#" aria-label="Facebook"></a>
-        <a href="#" aria-label="Twitter"></a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Find smoke shops near you and browse top brands."
+    />
+    <title>FindMySmokeShop</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <a href="index.html" class="brand">
+        <img
+          src="https://cdn1.site-media.eu/images/0/17873942/full-logo-trasnparent-bg-usB-Tiu-NwyR5pEhcKXtxQ.png"
+          alt="logo"
+          width="110"
+        />
+      </a>
+      <nav role="navigation">
+        <ul class="navLinks" id="navLinks">
+          <li><a href="brands.html">Brands</a></li>
+          <li><a href="for-shops.html">For Stores</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
+      <button class="menuBtn" id="menuBtn" aria-label="Toggle menu">
+        <span></span>
+      </button>
+    </header>
+    <section class="heroBlock">
+      <div class="heroInner">
+        <h1>Find a Smoke Shop Near You</h1>
+        <form action="locator.html" method="GET" class="searchForm">
+          <div class="searchBox">
+            <label for="homeSearch" class="visually-hidden"
+              >Search by city, ZIP, or product</label
+            >
+            <input
+              id="homeSearch"
+              type="text"
+              name="q"
+              placeholder="City, ZIP, or product…"
+              required
+            />
+            <button type="submit">Search</button>
+          </div>
+        </form>
       </div>
-    </div>
-  </div>
-  <p class="copy">© <span id="year">2025</span> FindMySmokeShop. All rights reserved.</p>
-</footer>
-  <script src="script.js" defer></script>
-</body>
+    </section>
+    <section class="featured">
+      <h2 class="featured__title">Featured Brands</h2>
+      <div class="featured__carousel">
+        <button class="carousel__nav carousel__nav--prev" aria-label="Previous">
+          &#10094;
+        </button>
+        <ul class="carousel__track">
+          <li class="productCard">
+            <img src="images/logo-raw.png" alt="RAW logo" /><span>RAW</span>
+          </li>
+          <li class="productCard">
+            <img src="images/logo-puffco.png" alt="Puffco logo" /><span
+              >Puffco</span
+            >
+          </li>
+          <li class="productCard">
+            <img
+              src="images/logo-stundenglass.png"
+              alt="Stündenglass logo"
+            /><span>Stündenglass</span>
+          </li>
+        </ul>
+        <button class="carousel__nav carousel__nav--next" aria-label="Next">
+          &#10095;
+        </button>
+      </div>
+      <div class="featured__cta">
+        <a href="locator.html" class="btn btn--primary">Store Locator</a>
+        <a href="learn-more.html" class="btn btn--secondary">Learn More</a>
+      </div>
+    </section>
+    <footer class="siteFooter">
+      <div class="footerInner">
+        <div class="footerCol">
+          <h3>FindMySmokeShop</h3>
+          <p>
+            Your one‑stop directory for smoke‑shop brands, products & local
+            inventory.
+          </p>
+        </div>
+        <div class="footerCol">
+          <h4>Quick Links</h4>
+          <ul class="footerLinks">
+            <li><a href="brands.html">Brands</a></li>
+            <li><a href="for-shops.html">For Stores</a></li>
+            <li><a href="locator.html">Store Locator</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footerCol">
+          <h4>Legal</h4>
+          <ul class="footerLinks">
+            <li><a href="terms.html">Terms of Use</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footerCol">
+          <h4>Follow Us</h4>
+          <div class="socialWrap">
+            <a href="#" aria-label="Instagram"></a>
+            <a href="#" aria-label="Facebook"></a>
+            <a href="#" aria-label="Twitter"></a>
+          </div>
+        </div>
+      </div>
+      <p class="copy">
+        © <span id="year">2025</span> FindMySmokeShop. All rights reserved.
+      </p>
+    </footer>
+    <script src="script.js" defer></script>
+  </body>
 </html>

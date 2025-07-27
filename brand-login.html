@@ -21,9 +21,23 @@
   </nav>
   <button class="menuBtn" id="menuBtn" aria-label="Toggle menu"><span></span></button>
 </header>
-  <main style="max-width:800px;margin:3rem auto;text-align:center">
+  <main style="max-width:600px;margin:3rem auto;text-align:center">
     <h1>Brand Login</h1>
-    <p>This page is coming soon.</p>
+    <form id="brandLoginForm" class="login-form">
+      <div class="form-row">
+        <label>Email<br>
+          <input type="email" id="brandEmail" required>
+        </label>
+      </div>
+      <div class="form-row">
+        <label>Password<br>
+          <input type="password" id="brandPassword" required>
+        </label>
+      </div>
+      <button type="submit" class="btn btn--primary">Log In</button>
+    </form>
+    <p class="small-text">Test account: <strong>brand@test.com</strong> / <strong>test123</strong></p>
+    <p class="small-text">Accounts are created manually for verified brand partners. <a href="contact.html">Contact us</a> to request yours.</p>
   </main>
 <footer class="siteFooter">
   <div class="footerInner">

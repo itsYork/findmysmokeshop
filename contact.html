@@ -21,9 +21,28 @@
   </nav>
   <button class="menuBtn" id="menuBtn" aria-label="Toggle menu"><span></span></button>
 </header>
-  <main style="max-width:800px;margin:3rem auto;text-align:center">
+  <main style="max-width:700px;margin:3rem auto;padding:0 1rem;text-align:center">
     <h1>Contact Us</h1>
-    <p>This page is coming soon.</p>
+    <p class="small-text">Submitting this form will open your email client to send your message to <strong>ecoelevation.owner@gmail.com</strong>. Use it to request a brand or store account so we can verify your business.</p>
+    <form id="contactForm" class="contact-form">
+      <div class="form-row">
+        <label>Name<br>
+          <input type="text" id="contactName" required>
+        </label>
+      </div>
+      <div class="form-row">
+        <label>Email<br>
+          <input type="email" id="contactEmail" required>
+        </label>
+      </div>
+      <div class="form-row">
+        <label>Message<br>
+          <textarea id="contactMessage" rows="4" required></textarea>
+        </label>
+      </div>
+      <button type="submit" class="btn btn--primary">Send</button>
+    </form>
+    <p id="contactStatus" style="margin-top:1rem;"></p>
   </main>
 <footer class="siteFooter">
   <div class="footerInner">

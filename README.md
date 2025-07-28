@@ -22,6 +22,10 @@ Brand and retailer logins use credentials stored in the browser's
 `localStorage`. This approach is meant only for demo/testing purposes and is
 not secure for real accounts.
 
+Visitors can create an account from `signup.html`. New accounts are marked as
+pending until you approve them in the SQLite database. Logging in before
+approval will return an "Account pending approval" error.
+
 
 
 ## Python backend
@@ -56,6 +60,9 @@ a SQLite database stored alongside the code.
 - `POST /logout` – end the current session.
 - `GET /me` – return the logged in user's email and subscription status.
 - `POST /subscribe` – update subscription status with body `{ "status": "..." }`.
+
+The brand and retail portals contain a small form that lets logged in users
+update their subscription level using the `/subscribe` endpoint.
 
 Set `SECRET_KEY` in `backend/app.py` to a strong value before deploying.
 

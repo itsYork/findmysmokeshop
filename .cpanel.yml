@@ -1,0 +1,3 @@
+deployment:
+  tasks:
+    - /bin/rsync -av --delete --exclude='.git' ./ ~/public_html/

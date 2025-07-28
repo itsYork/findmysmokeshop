@@ -2,6 +2,8 @@
 
 A simple static website for locating smoke shops and browsing popular smoke‑shop brands. The project contains only HTML, CSS and a small amount of JavaScript for interactive features and for calling a small Flask API.
 
+Visitors will see an age verification popup on first load. They must confirm they are 21 or older to access the pages. The choice is stored in `localStorage` so the prompt only appears once per browser.
+
 ## Serving the site locally
 
 Since the project consists solely of static files, you can serve it locally with any static file server. If you have Python installed, run the following from the project root:

@@ -1,6 +1,6 @@
 # FindMySmokeShop
 
-A simple static website for locating smoke shops and browsing popular smoke‑shop brands. The project contains only HTML, CSS and a small amount of JavaScript for interactive features and for calling the Foursquare Places API.
+A simple static website for locating smoke shops and browsing popular smoke‑shop brands. The project contains only HTML, CSS and a small amount of JavaScript for interactive features and for calling a small Flask API.
 
 ## Serving the site locally
 
@@ -12,15 +12,9 @@ python3 -m http.server
 
 Then open `http://localhost:8000` in your browser and navigate to the HTML pages.
 
-## Foursquare API key
+## Google Maps API key
 
-The store locator in `locator.html` fetches nearby shops using the Foursquare Places API. The key is defined in [`script.js`](script.js) as the constant `FSQ_API_KEY`:
-
-```javascript
-const FSQ_API_KEY = 'YOUR_FOURSQUARE_API_KEY';
-```
-
-Replace the placeholder value with your actual API key before using the locator page.
+Store searches now proxy to the Google Maps Places API through the Flask backend. Set the `GOOGLE_MAPS_API_KEY` environment variable before running the server so your key isn't exposed to the browser.
 
 ## Login credentials
 
@@ -28,8 +22,11 @@ Brand and retailer logins use credentials stored in the browser's
 `localStorage`. This approach is meant only for demo/testing purposes and is
 not secure for real accounts.
 
+Visitors can create an account from `signup.html`. New accounts are marked as
+pending until you approve them in the SQLite database. Logging in before
+approval will return an "Account pending approval" error.
 
-v4sahf-codex/find-namecheap-hosted-app-options
+
 
 ## Python backend
 
@@ -64,26 +61,29 @@ a SQLite database stored alongside the code.
 - `GET /me` – return the logged in user's email and subscription status.
 - `POST /subscribe` – update subscription status with body `{ "status": "..." }`.
 
+The brand and retail portals contain a small form that lets logged in users
+update their subscription level using the `/subscribe` endpoint.
+
 Set `SECRET_KEY` in `backend/app.py` to a strong value before deploying.
 
-## Deploying with Git on Namecheap
+## Deploying with cPanel Git
 
-Namecheap's cPanel includes a **Git Version Control** feature that can automatically pull your repository and run deployment commands.
+cPanel includes a **Git Version Control** feature that can automatically pull your repository and run deployment commands.
 
 1. Log in to cPanel and open **Git Version Control**.
 2. Click **Create** and choose a repository path such as `~/repos/findmysmokeshop.git`. If your code is hosted elsewhere, provide the clone URL.
 3. cPanel will display an SSH address. On your local machine, add it as a remote:
 
    ```bash
-   git remote add namecheap ssh://USERNAME@HOSTNAME/home/USERNAME/repos/findmysmokeshop.git
+   git remote add cpanel ssh://USERNAME@HOSTNAME/home/USERNAME/repos/findmysmokeshop.git
    ```
 
    Replace `USERNAME` and `HOSTNAME` with your account details.
 
-4. Push your code to Namecheap:
+4. Push your code to cPanel:
 
    ```bash
-   git push namecheap main
+   git push cpanel main
    ```
 
 5. To deploy automatically, add a `.cpanel.yml` file with instructions:
@@ -99,27 +99,4 @@ Namecheap's cPanel includes a **Git Version Control** feature that can automatic
 6. Enable deployment in cPanel's Git interface. Each push will run the commands from `.cpanel.yml`.
 
 7. If using the Flask backend, create a Python app in cPanel's **Setup Python App** and set its project path to the `backend/` directory. Restart the app after updates.
-
-=======
-## Python backend
-
-A minimal Flask application is provided in `app.py` for handling user registration, login and basic subscription storage. It uses SQLite for persistence and exposes JSON API endpoints under `/api/*`.
-
-### Setup
-
-1. Install dependencies in a virtual environment:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-2. Run the server locally:
-
-```bash
-python app.py
-```
-
-The application will create `app.db` on first start. API requests can be sent from the frontend using `fetch()`.
 

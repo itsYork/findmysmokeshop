@@ -25,12 +25,24 @@
 </header>
   <main class="infoWrap">
     <h1>Store Dashboard</h1>
-    <ul>
-      <li><strong>Update Inventory:</strong> manage the products you carry.</li>
-      <li><strong>Claim or Update Location:</strong> edit store details and hours.</li>
-      <li><strong>View Lead Stats:</strong> track customer inquiries and visits.</li>
-    </ul>
-    <form id="subForm" class="subscriptionForm">
+    <div class="dashGrid">
+      <section class="dashCard">
+        <h2>Inventory</h2>
+        <p>Manage the products stocked at your store.</p>
+        <button class="btn btn--primary">Update Inventory</button>
+      </section>
+      <section class="dashCard">
+        <h2>Location Details</h2>
+        <p>Edit your store hours and contact info.</p>
+        <button class="btn btn--primary">Edit Profile</button>
+      </section>
+      <section class="dashCard">
+        <h2>Your Stats</h2>
+        <p class="metric">Inquiries: <span id="inquiryCount">0</span></p>
+        <p class="metric">Visits: <span id="visitCount">0</span></p>
+      </section>
+    </div>
+    <form id="subForm" class="subscriptionForm mt-1">
       <label>Subscription
         <select id="subSelect">
           <option value="none">None</option>

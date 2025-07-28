@@ -25,12 +25,24 @@
 </header>
   <main class="infoWrap">
     <h1>Brand Dashboard</h1>
-    <ul>
-      <li><strong>Manage Products:</strong> add or edit your product listings.</li>
-      <li><strong>Update Brand Assets:</strong> upload new logos and images.</li>
-      <li><strong>View Analytics:</strong> see store leads and brand views.</li>
-    </ul>
-    <form id="subForm" class="subscriptionForm">
+    <div class="dashGrid">
+      <section class="dashCard">
+        <h2>Product Listings</h2>
+        <p>Add or edit the products displayed to stores.</p>
+        <button class="btn btn--primary">Manage Products</button>
+      </section>
+      <section class="dashCard">
+        <h2>Brand Assets</h2>
+        <p>Upload new logos and marketing materials.</p>
+        <button class="btn btn--primary">Upload Assets</button>
+      </section>
+      <section class="dashCard">
+        <h2>Your Stats</h2>
+        <p class="metric">Views: <span id="viewsCount">0</span></p>
+        <p class="metric">Leads: <span id="leadsCount">0</span></p>
+      </section>
+    </div>
+    <form id="subForm" class="subscriptionForm mt-1">
       <label>Subscription
         <select id="subSelect">
           <option value="none">None</option>

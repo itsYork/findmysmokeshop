@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const locForm = document.getElementById('locatorForm');
   if (locForm) {
     const results = document.getElementById('storeResults');
-    const FSQ_API_KEY = 'YOUR_FOURSQUARE_API_KEY';
+    const mapImg  = document.getElementById('mapImage');
     const PARTNERED_IDS = ['PARTNER_ID_1', 'PARTNER_ID_2'];
 
     const params = new URLSearchParams(window.location.search);
@@ -87,29 +87,31 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchStores(opts) {
       lastOpts = opts;
       results.textContent = 'Loading...';
+      if (mapImg) mapImg.src = '';
       try {
-        const url = new URL('https://api.foursquare.com/v3/places/search');
-        url.searchParams.set('query', 'smoke shop');
-        url.searchParams.set('limit', '20');
-        if (activeFilter === 'open') url.searchParams.set('open_now', 'true');
+        const url = new URL('/api/stores', window.location.origin);
+        if (activeFilter === 'open') url.searchParams.set('open', '1');
         if (opts.near) url.searchParams.set('near', opts.near);
-        if (opts.ll) {
-          url.searchParams.set('ll', opts.ll);
-          url.searchParams.set('radius', '10000');
-        }
-
-        const resp = await fetch(url.toString(), {
-          headers: { 'Accept': 'application/json', 'Authorization': FSQ_API_KEY }
-        });
+        if (opts.ll) url.searchParams.set('ll', opts.ll);
+        const resp = await fetch(url.toString());
         const data = await resp.json();
-        let stores = data.results || [];
+        let stores = data;
         if (activeFilter === 'partnered') {
-          stores = stores.filter(s => PARTNERED_IDS.includes(s.fsq_id));
+          stores = stores.filter(s => PARTNERED_IDS.includes(s.place_id));
         }
         showResults(stores);
+        updateMap(stores);
       } catch (err) {
         results.textContent = 'Error loading stores.';
       }
+    }
+
+    function updateMap(stores) {
+      if (!mapImg) return;
+      if (!stores.length) { mapImg.alt = 'No stores found'; mapImg.src = ''; return; }
+      const params = new URLSearchParams();
+      stores.forEach(s => params.append('marker', `${s.lat},${s.lng}`));
+      mapImg.src = `/api/static-map?${params.toString()}`;
     }
 
     function showResults(stores) {
@@ -123,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nameEl.textContent = s.name || '';
         div.appendChild(nameEl);
 
-        if (PARTNERED_IDS.includes(s.fsq_id)) {
+        if (PARTNERED_IDS.includes(s.place_id)) {
           div.appendChild(document.createTextNode(' '));
           const badge = document.createElement('span');
           badge.className = 'badge';
@@ -134,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         div.appendChild(document.createElement('br'));
 
         const addr = document.createElement('small');
-        addr.textContent = s.location.formatted_address || '';
+        addr.textContent = s.address || '';
         div.appendChild(addr);
 
         results.appendChild(div);

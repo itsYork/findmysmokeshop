@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 # SECRET_KEY can be provided via environment variable for production
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'change-me')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY') or 'change-me'
 CORS(app, supports_credentials=True)
 
 DB_PATH = Path(__file__).with_name('app.db')

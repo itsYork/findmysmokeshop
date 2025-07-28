@@ -68,8 +68,8 @@ The brand and retail portals contain a small form that lets logged in users
 update their subscription level using the `/api/subscribe` endpoint.
 
 Set the `SECRET_KEY` environment variable before running the server to keep
-session data secure. `backend/app.py` falls back to a default if this variable
-is missing.
+session data secure. `backend/app.py` uses a default value of "change-me" only
+when `SECRET_KEY` is unset or blank.
 
 ## Deploying with cPanel Git
 
@@ -105,3 +105,20 @@ cPanel includes a **Git Version Control** feature that can automatically pull yo
 
 7. If using the Flask backend, create a Python app in cPanel's **Setup Python App** and set its project path to the `backend/` directory. Restart the app after updates.
 
+
+## Image sources
+
+The following Unsplash photos are referenced in the site:
+
+| Use case | Direct Unsplash URL | Suggested alt text |
+| -------- | ------------------- | ------------------ |
+| Hero banner – street credibility | https://unsplash.com/photos/a-man-standing-outside-of-a-cigar-shop-1M1UfYNy21w | Person standing outside a classic cigar and smoke shop |
+| Product shelf visual | https://unsplash.com/photos/a-bunch-of-cigars-that-are-on-a-shelf-arvkT97WUI4 | Rows of premium cigars neatly stacked on wood shelves |
+| Urban mood break | https://unsplash.com/photos/red-cigars-neon-signage-hanging-decor-tb-u5Jqz15Q | Neon sign that reads cigars glowing red in a dark room |
+| Hookah section header | https://unsplash.com/photos/a-hookah-with-smoke-coming-out-of-it-sitting-on-a-table-Sw7dClRfLk0 | Hookah on a table exhaling thick white smoke |
+| Vape products tile | https://unsplash.com/photos/a-disposable-vape-pen-rests-on-a-concrete-surface-JODMH5e9rds | Disposable vape pen resting on concrete |
+| Close-up vape detail | https://unsplash.com/photos/a-close-up-of-a-pen-PMf9FvSUMQg | Macro shot of a sleek vape pen cartridge |
+| Abstract smoke background 1 | https://unsplash.com/photos/a-bunch-of-colorful-smoke-is-in-the-air-ItYcen4Yvlc | Colorful smoke swirling against black backdrop |
+| Abstract smoke background 2 | https://unsplash.com/photos/a-multicolored-smoke-texture-on-a-black-background-CzllqUw_ecU | Multicolored smoke texture on dark background |
+| Accent banner gradient | https://unsplash.com/photos/blue-and-orange-smoke-wQLAGv4_OYs | Blue and orange smoke blending together |
+| Hookah lounge ambience | https://unsplash.com/photos/green-and-gray-hookah-_ynhWwRBKXk | Stylish green and gray hookah in low-light lounge |

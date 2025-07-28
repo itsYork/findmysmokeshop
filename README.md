@@ -1,6 +1,11 @@
 # FindMySmokeShop
 
 A simple static website for locating smoke shops and browsing popular smoke‑shop brands. The project contains only HTML, CSS and a small amount of JavaScript for interactive features and for calling a small Flask API.
+ 1te8mw-codex/swap-maps-to-google-maps-api
+
+Visitors will see an age verification popup on first load. They must confirm they are 21 or older to access the pages. The choice is stored in `localStorage` so the prompt only appears once per browser.
+
+
 
 ## Serving the site locally
 

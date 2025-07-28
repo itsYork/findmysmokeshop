@@ -102,6 +102,9 @@ img{display:block;max-width:100%}
 .login-form button:hover,.contact-form button:hover{opacity:.85}
 .subscriptionForm{display:flex;align-items:center;gap:1rem;margin-top:1.5rem}
 .subscriptionForm select{padding:.5rem .7rem;border:2px solid #ccc;border-radius:var(--radius)}
+1te8mw-codex/swap-maps-to-google-maps-api
+.ageGate{position:fixed;inset:0;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;z-index:1000}
+.ageGateBox{background:#fff;padding:2rem;border-radius:var(--radius);text-align:center;max-width:340px}
 .small-text{margin-top:1rem;font-size:.9rem}
 /* ---- Utility ---- */
 .main-centered{max-width:700px;margin:3rem auto;text-align:center;}

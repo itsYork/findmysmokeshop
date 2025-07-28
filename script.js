@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
+  if (!localStorage.getItem('ageVerified')) {
+    const gate = document.createElement('div');
+    gate.id = 'ageGate';
+    gate.innerHTML = `
+      <div class="ageGateBox">
+        <p>You must be 21 or older to enter this site.</p>
+        <button id="ageConfirm" class="btn btn--primary">I am 21 or older</button>
+      </div>`;
+    document.body.appendChild(gate);
+    document.getElementById('ageConfirm').addEventListener('click', () => {
+      localStorage.setItem('ageVerified', 'true');
+      location.reload();
+    });
+    return;
+  }
   const menuBtn  = document.getElementById('menuBtn');
   const navLinks = document.getElementById('navLinks');
   if (menuBtn) menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));

@@ -30,9 +30,10 @@ approval will return an "Account pending approval" error.
 
 ## Python backend
 
-A simple Flask application is located in the `backend/` directory. It exposes API
-endpoints for user registration, login and subscription management. The app uses
-a SQLite database stored alongside the code.
+A simple Flask application is located in the `backend/` directory. It exposes
+API endpoints under the `/api/` path for user registration, login,
+subscription management and store lookups. The app uses a SQLite database
+stored alongside the code.
 
 ### Running locally
 
@@ -55,14 +56,16 @@ a SQLite database stored alongside the code.
 
 ### API endpoints
 
-- `POST /register` – body `{ "email": "user@example.com", "password": "..." }`.
-- `POST /login` – authenticate the user.
-- `POST /logout` – end the current session.
-- `GET /me` – return the logged in user's email and subscription status.
-- `POST /subscribe` – update subscription status with body `{ "status": "..." }`.
+- `POST /api/register` – body `{ "email": "user@example.com", "password": "..." }`.
+- `POST /api/login` – authenticate the user.
+- `POST /api/logout` – end the current session.
+- `GET /api/me` – return the logged in user's email and subscription status.
+- `POST /api/subscribe` – update subscription status with body `{ "status": "..." }`.
+- `GET /api/stores` – proxy to the Google Maps Places API.
+- `GET /api/static-map` – return a static map image for store results.
 
 The brand and retail portals contain a small form that lets logged in users
-update their subscription level using the `/subscribe` endpoint.
+update their subscription level using the `/api/subscribe` endpoint.
 
 Set `SECRET_KEY` in `backend/app.py` to a strong value before deploying.
 

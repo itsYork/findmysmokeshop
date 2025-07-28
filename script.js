@@ -200,6 +200,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const signupForm = document.getElementById('signupForm');
+  if (signupForm) {
+    signupForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const email = document.getElementById('signupEmail').value.trim();
+      const pass = document.getElementById('signupPassword').value;
+      try {
+        const resp = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password: pass })
+        });
+        if (resp.ok) {
+          signupForm.innerHTML =
+            '<p>Thanks for signing up! Your account is pending approval.</p>';
+        } else {
+          const data = await resp.json().catch(() => ({}));
+          alert(data.error || 'Sign up failed');
+        }
+      } catch (err) {
+        alert('Sign up failed');
+      }
+    });
+  }
+
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', e => {
@@ -246,6 +271,25 @@ document.addEventListener('DOMContentLoaded', () => {
       try { await fetch('/api/logout', { method: 'POST' }); } catch(e) {}
       localStorage.removeItem('retailLoggedIn');
       window.location.href = 'retail-login.html';
+    });
+  }
+
+  const subForm = document.getElementById('subForm');
+  if (subForm) {
+    subForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const status = document.getElementById('subSelect').value;
+      try {
+        const resp = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status })
+        });
+        if (resp.ok) alert('Subscription updated');
+        else alert('Update failed');
+      } catch (err) {
+        alert('Update failed');
+      }
     });
   }
 });

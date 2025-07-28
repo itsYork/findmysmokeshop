@@ -24,10 +24,15 @@ def init_db():
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 email TEXT UNIQUE NOT NULL,
                 password_hash TEXT NOT NULL,
-                subscription TEXT DEFAULT ''
+                subscription TEXT DEFAULT '',
+                approved INTEGER DEFAULT 0
             )
-            """
+        """
         )
+        try:
+            conn.execute('ALTER TABLE users ADD COLUMN approved INTEGER DEFAULT 0')
+        except sqlite3.OperationalError:
+            pass
 
 init_db()
 
@@ -57,9 +62,11 @@ def login():
     if not email or not password:
         return jsonify({'error': 'Email and password required'}), 400
     with get_db() as conn:
-        cur = conn.execute('SELECT id, password_hash FROM users WHERE email=?', (email,))
+        cur = conn.execute('SELECT id, password_hash, approved FROM users WHERE email=?', (email,))
         row = cur.fetchone()
         if row and check_password_hash(row['password_hash'], password):
+            if not row['approved']:
+                return jsonify({'error': 'Account pending approval'}), 403
             session['user_id'] = row['id']
             return jsonify({'message': 'Logged in'})
     return jsonify({'error': 'Invalid credentials'}), 401
@@ -75,11 +82,11 @@ def me():
     if not uid:
         return jsonify({'error': 'Not logged in'}), 401
     with get_db() as conn:
-        cur = conn.execute('SELECT email, subscription FROM users WHERE id=?', (uid,))
+        cur = conn.execute('SELECT email, subscription, approved FROM users WHERE id=?', (uid,))
         row = cur.fetchone()
         if row is None:
             return jsonify({'error': 'User not found'}), 404
-        return jsonify({'email': row['email'], 'subscription': row['subscription']})
+        return jsonify({'email': row['email'], 'subscription': row['subscription'], 'approved': bool(row['approved'])})
 
 @app.post('/subscribe')
 def subscribe():

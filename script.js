@@ -143,20 +143,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ----- Simple Login Handling -----
-  // Credentials are stored in localStorage purely for demo/testing
-  // purposes and should not be considered secure.
+  // Login credentials are now verified by the Flask backend in `app.py`.
+  // The results of a successful login are still stored in localStorage so
+  // the existing portal checks continue to work.
   const brandForm = document.getElementById('brandLoginForm');
   if (brandForm) {
-    brandForm.addEventListener('submit', e => {
+    brandForm.addEventListener('submit', async e => {
       e.preventDefault();
       const email = document.getElementById('brandEmail').value.trim();
       const pass = document.getElementById('brandPassword').value;
-      const accounts = JSON.parse(localStorage.getItem('brandAccounts') || '{}');
-      if (accounts[email] && accounts[email].password === pass) {
-        localStorage.setItem('brandLoggedIn','true');
-        window.location.href = 'brand-portal.html';
-      } else {
-        alert('Invalid credentials. Please contact us to request access.');
+      try {
+        const resp = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password: pass })
+        });
+        if (resp.ok) {
+          localStorage.setItem('brandLoggedIn','true');
+          window.location.href = 'brand-portal.html';
+        } else {
+          const data = await resp.json().catch(() => ({}));
+          alert(data.error || 'Login failed');
+        }
+      } catch (err) {
+        alert('Login failed');
       }
       brandForm.reset();
     });
@@ -164,16 +174,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const retailForm = document.getElementById('retailLoginForm');
   if (retailForm) {
-    retailForm.addEventListener('submit', e => {
+    retailForm.addEventListener('submit', async e => {
       e.preventDefault();
       const email = document.getElementById('retailEmail').value.trim();
       const pass = document.getElementById('retailPassword').value;
-      const accounts = JSON.parse(localStorage.getItem('retailAccounts') || '{}');
-      if (accounts[email] && accounts[email].password === pass) {
-        localStorage.setItem('retailLoggedIn','true');
-        window.location.href = 'retail-portal.html';
-      } else {
-        alert('Invalid credentials. Please contact us to request access.');
+      try {
+        const resp = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password: pass })
+        });
+        if (resp.ok) {
+          localStorage.setItem('retailLoggedIn','true');
+          window.location.href = 'retail-portal.html';
+        } else {
+          const data = await resp.json().catch(() => ({}));
+          alert(data.error || 'Login failed');
+        }
+      } catch (err) {
+        alert('Login failed');
       }
       retailForm.reset();
     });
@@ -209,7 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   const brandLogout = document.getElementById('brandLogout');
   if (brandLogout) {
-    brandLogout.addEventListener('click', () => {
+    brandLogout.addEventListener('click', async () => {
+      try { await fetch('/api/logout', { method: 'POST' }); } catch(e) {}
       localStorage.removeItem('brandLoggedIn');
       window.location.href = 'brand-login.html';
     });
@@ -220,7 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   const retailLogout = document.getElementById('retailLogout');
   if (retailLogout) {
-    retailLogout.addEventListener('click', () => {
+    retailLogout.addEventListener('click', async () => {
+      try { await fetch('/api/logout', { method: 'POST' }); } catch(e) {}
       localStorage.removeItem('retailLoggedIn');
       window.location.href = 'retail-login.html';
     });

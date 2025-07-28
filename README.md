@@ -67,7 +67,9 @@ stored alongside the code.
 The brand and retail portals contain a small form that lets logged in users
 update their subscription level using the `/api/subscribe` endpoint.
 
-Set `SECRET_KEY` in `backend/app.py` to a strong value before deploying.
+Set the `SECRET_KEY` environment variable before running the server to keep
+session data secure. `backend/app.py` falls back to a default if this variable
+is missing.
 
 ## Deploying with cPanel Git
 

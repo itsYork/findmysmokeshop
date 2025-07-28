@@ -85,6 +85,11 @@ img{display:block;max-width:100%}
 .filterRow{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
 .filterBtn{padding:.4rem 1rem;border:2px solid var(--accent);border-radius:999px;background:#fff;color:var(--accent);cursor:pointer;font-size:.9rem}
 .filterBtn.active{background:var(--accent);color:#fff}
+6l41b7-codex/design-locator-page-layout
+.locatorGrid{display:flex;gap:2rem;max-width:var(--maxW);margin:0 auto;padding:0 1rem;min-height:60vh}
+.locatorList{flex:0 0 30%;display:flex;flex-direction:column}
+.locatorList .results{flex:1 1 auto;overflow-y:auto;padding-right:.5rem;margin-top:1rem}
+.locatorMap{flex:1;background:#e5e5e5;border-radius:var(--radius);position:relative;min-height:480px}
 .locatorGrid{display:flex;gap:2rem;max-width:var(--maxW);margin:0 auto;padding:0 1rem}
 .locatorList{flex:0 0 30%;display:flex;flex-direction:column}
 .locatorList .results{flex:1 1 auto;overflow-y:auto;padding-right:.5rem;margin-top:1rem}

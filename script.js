@@ -35,6 +35,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const locForm = document.getElementById('locatorForm');
   if (locForm) {
     const results = document.getElementById('storeResults');
+    const mapEl  = document.getElementById('map');
+    let map, markers;
+    if (mapEl && window.L) {
+      map = L.map(mapEl).setView([37.09, -95.71], 4);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+      markers = L.layerGroup().addTo(map);
+    }
+
     const FSQ_API_KEY = 'YOUR_FOURSQUARE_API_KEY';
     const PARTNERED_IDS = ['PARTNER_ID_1', 'PARTNER_ID_2'];
 
@@ -115,6 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function showResults(stores) {
       if (!stores.length) { results.textContent = 'No stores found.'; return; }
       results.innerHTML = '';
+      if (markers) markers.clearLayers();
+      let first;
       stores.forEach(s => {
         const div = document.createElement('div');
         div.className = 'storeItem';
@@ -138,7 +150,18 @@ document.addEventListener('DOMContentLoaded', () => {
         div.appendChild(addr);
 
         results.appendChild(div);
+
+        if (markers && s.geocodes && s.geocodes.main) {
+          const lat = s.geocodes.main.latitude;
+          const lon = s.geocodes.main.longitude;
+          const m = L.marker([lat, lon]).addTo(markers).bindPopup(`<strong>${s.name}</strong><br>${addr}`);
+          if (!first) first = m;
+        }
       });
+      if (first && map) {
+        map.setView(first.getLatLng(), 12);
+        first.openPopup();
+      }
     }
   }
 

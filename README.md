@@ -29,6 +29,7 @@ Brand and retailer logins use credentials stored in the browser's
 not secure for real accounts.
 
 
+v4sahf-codex/find-namecheap-hosted-app-options
 
 ## Python backend
 
@@ -98,4 +99,27 @@ Namecheap's cPanel includes a **Git Version Control** feature that can automatic
 6. Enable deployment in cPanel's Git interface. Each push will run the commands from `.cpanel.yml`.
 
 7. If using the Flask backend, create a Python app in cPanel's **Setup Python App** and set its project path to the `backend/` directory. Restart the app after updates.
+
+=======
+## Python backend
+
+A minimal Flask application is provided in `app.py` for handling user registration, login and basic subscription storage. It uses SQLite for persistence and exposes JSON API endpoints under `/api/*`.
+
+### Setup
+
+1. Install dependencies in a virtual environment:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+2. Run the server locally:
+
+```bash
+python app.py
+```
+
+The application will create `app.db` on first start. API requests can be sent from the frontend using `fetch()`.
 

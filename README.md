@@ -71,6 +71,24 @@ Set the `SECRET_KEY` environment variable before running the server to keep
 session data secure. `backend/app.py` falls back to a default if this variable
 is missing.
 
+## Docker
+
+A `Dockerfile` under `backend/` can build a containerized version of the API.
+
+Build the image from the project root:
+
+```bash
+docker build -t findmysmokeshop-backend ./backend
+```
+
+Run the container and expose port 5000:
+
+```bash
+docker run -p 5000:5000 findmysmokeshop-backend
+```
+
+The API will be available at `http://localhost:5000/`.
+
 ## Deploying with cPanel Git
 
 cPanel includes a **Git Version Control** feature that can automatically pull your repository and run deployment commands.

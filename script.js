@@ -6,6 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const yr = document.getElementById('year');
   if (yr) yr.textContent = new Date().getFullYear();
 
+  const homeForm = document.getElementById('homeSearchForm');
+  if (homeForm) {
+    homeForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const query = document.getElementById('homeSearch').value.trim();
+      if (query) {
+        window.location.href = `locator.html?q=${encodeURIComponent(query)}`;
+      }
+    });
+  }
+
   const search  = document.getElementById('brandSearch');
   const select  = document.getElementById('categoryFilter');
   if (search && select) {
